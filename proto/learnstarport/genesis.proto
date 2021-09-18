@@ -2,11 +2,14 @@ syntax = "proto3";
 package turtlebasket.learnstarport.learnstarport;
 
 // this line is used by starport scaffolding # genesis/proto/import
+import "learnstarport/ext_transaction.proto";
 
 option go_package = "github.com/turtlebasket/learn-starport/x/learnstarport/types";
 
 // GenesisState defines the learnstarport module's genesis state.
 message GenesisState {
     // this line is used by starport scaffolding # genesis/proto/state
+		repeated ExtTransaction extTransactionList = 1; // this line is used by starport scaffolding # genesis/proto/stateField
+		uint64 extTransactionCount = 2; // this line is used by starport scaffolding # genesis/proto/stateField
     // this line is used by starport scaffolding # ibc/genesis/proto
 }

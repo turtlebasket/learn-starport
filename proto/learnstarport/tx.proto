@@ -2,12 +2,47 @@ syntax = "proto3";
 package turtlebasket.learnstarport.learnstarport;
 
 // this line is used by starport scaffolding # proto/tx/import
+import "learnstarport/ext_transaction.proto";
 
 option go_package = "github.com/turtlebasket/learn-starport/x/learnstarport/types";
 
 // Msg defines the Msg service.
 service Msg {
     // this line is used by starport scaffolding # proto/tx/rpc
+  rpc CreateExtTransaction(MsgCreateExtTransaction) returns (MsgCreateExtTransactionResponse);
+  rpc UpdateExtTransaction(MsgUpdateExtTransaction) returns (MsgUpdateExtTransactionResponse);
+  rpc DeleteExtTransaction(MsgDeleteExtTransaction) returns (MsgDeleteExtTransactionResponse);
 }
 
 // this line is used by starport scaffolding # proto/tx/message
+message MsgCreateExtTransaction {
+  string creator = 1;
+  string chain = 2;
+  string to = 3;
+  string from = 4;
+  string amount = 5;
+  string txid = 6;
+}
+
+message MsgCreateExtTransactionResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateExtTransaction {
+  string creator = 1;
+  uint64 id = 2;
+  string chain = 3;
+  string to = 4;
+  string from = 5;
+  string amount = 6;
+  string txid = 7;
+}
+
+message MsgUpdateExtTransactionResponse { }
+
+message MsgDeleteExtTransaction {
+  string creator = 1;
+  uint64 id = 2;
+}
+
+message MsgDeleteExtTransactionResponse { }

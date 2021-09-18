@@ -83,6 +83,7 @@ import (
 	tmjson "github.com/tendermint/tendermint/libs/json"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	"github.com/turtlebasket/learn-starport/docs"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 	learnstarportmodule "github.com/turtlebasket/learn-starport/x/learnstarport"
 	learnstarportmodulekeeper "github.com/turtlebasket/learn-starport/x/learnstarport/keeper"

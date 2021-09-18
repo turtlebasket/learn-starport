@@ -6,12 +6,16 @@ package types
 import (
 	context "context"
 	fmt "fmt"
-	_ "github.com/cosmos/cosmos-sdk/types/query"
+	query "github.com/cosmos/cosmos-sdk/types/query"
 	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
+	io "io"
 	math "math"
+	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -25,10 +29,202 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
+// this line is used by starport scaffolding # 3
+type QueryGetExtTransactionRequest struct {
+	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (m *QueryGetExtTransactionRequest) Reset()         { *m = QueryGetExtTransactionRequest{} }
+func (m *QueryGetExtTransactionRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetExtTransactionRequest) ProtoMessage()    {}
+func (*QueryGetExtTransactionRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_2443915fd1509eec, []int{0}
+}
+func (m *QueryGetExtTransactionRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetExtTransactionRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetExtTransactionRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetExtTransactionRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetExtTransactionRequest.Merge(m, src)
+}
+func (m *QueryGetExtTransactionRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetExtTransactionRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetExtTransactionRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetExtTransactionRequest proto.InternalMessageInfo
+
+func (m *QueryGetExtTransactionRequest) GetId() uint64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+type QueryGetExtTransactionResponse struct {
+	ExtTransaction *ExtTransaction `protobuf:"bytes,1,opt,name=ExtTransaction,proto3" json:"ExtTransaction,omitempty"`
+}
+
+func (m *QueryGetExtTransactionResponse) Reset()         { *m = QueryGetExtTransactionResponse{} }
+func (m *QueryGetExtTransactionResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetExtTransactionResponse) ProtoMessage()    {}
+func (*QueryGetExtTransactionResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_2443915fd1509eec, []int{1}
+}
+func (m *QueryGetExtTransactionResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetExtTransactionResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetExtTransactionResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetExtTransactionResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetExtTransactionResponse.Merge(m, src)
+}
+func (m *QueryGetExtTransactionResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetExtTransactionResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetExtTransactionResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetExtTransactionResponse proto.InternalMessageInfo
+
+func (m *QueryGetExtTransactionResponse) GetExtTransaction() *ExtTransaction {
+	if m != nil {
+		return m.ExtTransaction
+	}
+	return nil
+}
+
+type QueryAllExtTransactionRequest struct {
+	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllExtTransactionRequest) Reset()         { *m = QueryAllExtTransactionRequest{} }
+func (m *QueryAllExtTransactionRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllExtTransactionRequest) ProtoMessage()    {}
+func (*QueryAllExtTransactionRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_2443915fd1509eec, []int{2}
+}
+func (m *QueryAllExtTransactionRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllExtTransactionRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllExtTransactionRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllExtTransactionRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllExtTransactionRequest.Merge(m, src)
+}
+func (m *QueryAllExtTransactionRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllExtTransactionRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllExtTransactionRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllExtTransactionRequest proto.InternalMessageInfo
+
+func (m *QueryAllExtTransactionRequest) GetPagination() *query.PageRequest {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryAllExtTransactionResponse struct {
+	ExtTransaction []*ExtTransaction   `protobuf:"bytes,1,rep,name=ExtTransaction,proto3" json:"ExtTransaction,omitempty"`
+	Pagination     *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllExtTransactionResponse) Reset()         { *m = QueryAllExtTransactionResponse{} }
+func (m *QueryAllExtTransactionResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryAllExtTransactionResponse) ProtoMessage()    {}
+func (*QueryAllExtTransactionResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_2443915fd1509eec, []int{3}
+}
+func (m *QueryAllExtTransactionResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllExtTransactionResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllExtTransactionResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllExtTransactionResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllExtTransactionResponse.Merge(m, src)
+}
+func (m *QueryAllExtTransactionResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllExtTransactionResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllExtTransactionResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllExtTransactionResponse proto.InternalMessageInfo
+
+func (m *QueryAllExtTransactionResponse) GetExtTransaction() []*ExtTransaction {
+	if m != nil {
+		return m.ExtTransaction
+	}
+	return nil
+}
+
+func (m *QueryAllExtTransactionResponse) GetPagination() *query.PageResponse {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+func init() {
+	proto.RegisterType((*QueryGetExtTransactionRequest)(nil), "turtlebasket.learnstarport.learnstarport.QueryGetExtTransactionRequest")
+	proto.RegisterType((*QueryGetExtTransactionResponse)(nil), "turtlebasket.learnstarport.learnstarport.QueryGetExtTransactionResponse")
+	proto.RegisterType((*QueryAllExtTransactionRequest)(nil), "turtlebasket.learnstarport.learnstarport.QueryAllExtTransactionRequest")
+	proto.RegisterType((*QueryAllExtTransactionResponse)(nil), "turtlebasket.learnstarport.learnstarport.QueryAllExtTransactionResponse")
+}
+
 func init() { proto.RegisterFile("learnstarport/query.proto", fileDescriptor_2443915fd1509eec) }
 
 var fileDescriptor_2443915fd1509eec = []byte{
-	// 200 bytes of a gzipped FileDescriptorProto
+	// 431 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0xcc, 0x49, 0x4d, 0x2c,
 	0xca, 0x2b, 0x2e, 0x49, 0x2c, 0x2a, 0xc8, 0x2f, 0x2a, 0xd1, 0x2f, 0x2c, 0x4d, 0x2d, 0xaa, 0xd4,
 	0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xd2, 0x28, 0x29, 0x2d, 0x2a, 0xc9, 0x49, 0x4d, 0x4a, 0x2c,
@@ -36,12 +232,26 @@ var fileDescriptor_2443915fd1509eec = []byte{
 	0xd5, 0x4f, 0x2c, 0xc8, 0xd4, 0x4f, 0xcc, 0xcb, 0xcb, 0x2f, 0x49, 0x2c, 0xc9, 0xcc, 0xcf, 0x2b,
 	0x86, 0x98, 0x23, 0xa5, 0x95, 0x9c, 0x5f, 0x9c, 0x9b, 0x5f, 0xac, 0x9f, 0x94, 0x58, 0x9c, 0x0a,
 	0xb1, 0x40, 0xbf, 0xcc, 0x30, 0x29, 0xb5, 0x24, 0xd1, 0x50, 0xbf, 0x20, 0x31, 0x3d, 0x33, 0x0f,
-	0xac, 0x18, 0xa2, 0xd6, 0x88, 0x9d, 0x8b, 0x35, 0x10, 0xa4, 0xc2, 0x29, 0xec, 0xc4, 0x23, 0x39,
-	0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f, 0x3c, 0x92, 0x63, 0x9c, 0xf0, 0x58, 0x8e, 0xe1, 0xc2, 0x63,
-	0x39, 0x86, 0x1b, 0x8f, 0xe5, 0x18, 0xa2, 0x6c, 0xd2, 0x33, 0x4b, 0x32, 0x4a, 0x93, 0xf4, 0x92,
-	0xf3, 0x73, 0xf5, 0x91, 0x5d, 0xa8, 0x0f, 0x76, 0x93, 0x2e, 0xdc, 0x2b, 0x15, 0xfa, 0xa8, 0x5e,
-	0x2b, 0xa9, 0x2c, 0x48, 0x2d, 0x4e, 0x62, 0x03, 0xdb, 0x63, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff,
-	0xff, 0xd3, 0x3e, 0x1a, 0xf8, 0x00, 0x00, 0x00,
+	0xac, 0x18, 0xaa, 0x56, 0x19, 0xd5, 0x39, 0xa9, 0x15, 0x25, 0xf1, 0x25, 0x45, 0x89, 0x79, 0xc5,
+	0x89, 0xc9, 0x08, 0x45, 0x4a, 0xfa, 0x5c, 0xb2, 0x81, 0x20, 0x63, 0xdc, 0x53, 0x4b, 0x5c, 0x2b,
+	0x4a, 0x42, 0x10, 0xf2, 0x41, 0xa9, 0x85, 0xa5, 0xa9, 0xc5, 0x25, 0x42, 0x7c, 0x5c, 0x4c, 0x99,
+	0x29, 0x12, 0x8c, 0x0a, 0x8c, 0x1a, 0x2c, 0x41, 0x4c, 0x99, 0x29, 0x4a, 0x4d, 0x8c, 0x5c, 0x72,
+	0xb8, 0x74, 0x14, 0x17, 0xe4, 0xe7, 0x15, 0xa7, 0x0a, 0x25, 0x70, 0xf1, 0xa1, 0xca, 0x80, 0xb5,
+	0x73, 0x1b, 0x59, 0xe8, 0x11, 0x1b, 0x0a, 0x7a, 0x68, 0x26, 0xa3, 0x99, 0xa7, 0x94, 0x0e, 0x75,
+	0xb5, 0x63, 0x4e, 0x0e, 0x76, 0x57, 0xbb, 0x71, 0x71, 0x21, 0xc2, 0x03, 0x6a, 0xbd, 0x9a, 0x1e,
+	0x24, 0xf0, 0xf4, 0x40, 0x81, 0xa7, 0x07, 0x89, 0x1d, 0x68, 0xe0, 0xe9, 0x05, 0x24, 0xa6, 0xa7,
+	0x42, 0xf5, 0x06, 0x21, 0xe9, 0x54, 0x3a, 0x0d, 0xf3, 0x2d, 0x16, 0x9b, 0xf0, 0xf8, 0x96, 0x99,
+	0x9a, 0xbe, 0x15, 0x72, 0x47, 0xf1, 0x0c, 0x13, 0xd8, 0x33, 0xea, 0x04, 0x3d, 0x03, 0x71, 0x1e,
+	0xb2, 0x6f, 0x8c, 0xee, 0x33, 0x73, 0xb1, 0x82, 0x7d, 0x23, 0xf4, 0x8a, 0x91, 0x0b, 0xc3, 0x16,
+	0xe2, 0xdd, 0x8b, 0x37, 0xc5, 0x48, 0x79, 0x50, 0x6e, 0x10, 0xc4, 0xed, 0x4a, 0xae, 0x4d, 0x97,
+	0x9f, 0x4c, 0x66, 0xb2, 0x17, 0xb2, 0xd5, 0x47, 0x36, 0x51, 0x1f, 0x35, 0x5d, 0x63, 0xa4, 0x72,
+	0x24, 0x93, 0xf4, 0xab, 0x33, 0x53, 0x6a, 0x85, 0x5e, 0x30, 0x72, 0x09, 0xa2, 0xda, 0xe0, 0x98,
+	0x93, 0x43, 0xb2, 0x7f, 0x71, 0xa5, 0x35, 0x92, 0xfd, 0x8b, 0x33, 0x29, 0x29, 0x39, 0x80, 0xfd,
+	0x6b, 0x25, 0x64, 0x41, 0xae, 0x7f, 0x9d, 0xc2, 0x4e, 0x3c, 0x92, 0x63, 0xbc, 0xf0, 0x48, 0x8e,
+	0xf1, 0xc1, 0x23, 0x39, 0xc6, 0x09, 0x8f, 0xe5, 0x18, 0x2e, 0x3c, 0x96, 0x63, 0xb8, 0xf1, 0x58,
+	0x8e, 0x21, 0xca, 0x26, 0x3d, 0xb3, 0x24, 0xa3, 0x34, 0x49, 0x2f, 0x39, 0x3f, 0x17, 0x8b, 0xe9,
+	0xba, 0x70, 0x03, 0x2b, 0xd0, 0x2c, 0x28, 0xa9, 0x2c, 0x48, 0x2d, 0x4e, 0x62, 0x03, 0x97, 0x16,
+	0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x56, 0xb3, 0xa6, 0x2a, 0xe3, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -56,6 +266,10 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type QueryClient interface {
+	// Queries a extTransaction by id.
+	ExtTransaction(ctx context.Context, in *QueryGetExtTransactionRequest, opts ...grpc.CallOption) (*QueryGetExtTransactionResponse, error)
+	// Queries a list of extTransaction items.
+	ExtTransactionAll(ctx context.Context, in *QueryAllExtTransactionRequest, opts ...grpc.CallOption) (*QueryAllExtTransactionResponse, error)
 }
 
 type queryClient struct {
@@ -66,22 +280,763 @@ func NewQueryClient(cc grpc1.ClientConn) QueryClient {
 	return &queryClient{cc}
 }
 
+func (c *queryClient) ExtTransaction(ctx context.Context, in *QueryGetExtTransactionRequest, opts ...grpc.CallOption) (*QueryGetExtTransactionResponse, error) {
+	out := new(QueryGetExtTransactionResponse)
+	err := c.cc.Invoke(ctx, "/turtlebasket.learnstarport.learnstarport.Query/ExtTransaction", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ExtTransactionAll(ctx context.Context, in *QueryAllExtTransactionRequest, opts ...grpc.CallOption) (*QueryAllExtTransactionResponse, error) {
+	out := new(QueryAllExtTransactionResponse)
+	err := c.cc.Invoke(ctx, "/turtlebasket.learnstarport.learnstarport.Query/ExtTransactionAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
+	// Queries a extTransaction by id.
+	ExtTransaction(context.Context, *QueryGetExtTransactionRequest) (*QueryGetExtTransactionResponse, error)
+	// Queries a list of extTransaction items.
+	ExtTransactionAll(context.Context, *QueryAllExtTransactionRequest) (*QueryAllExtTransactionResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
 type UnimplementedQueryServer struct {
 }
 
+func (*UnimplementedQueryServer) ExtTransaction(ctx context.Context, req *QueryGetExtTransactionRequest) (*QueryGetExtTransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExtTransaction not implemented")
+}
+func (*UnimplementedQueryServer) ExtTransactionAll(ctx context.Context, req *QueryAllExtTransactionRequest) (*QueryAllExtTransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExtTransactionAll not implemented")
+}
+
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
 	s.RegisterService(&_Query_serviceDesc, srv)
+}
+
+func _Query_ExtTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetExtTransactionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ExtTransaction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turtlebasket.learnstarport.learnstarport.Query/ExtTransaction",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ExtTransaction(ctx, req.(*QueryGetExtTransactionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ExtTransactionAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllExtTransactionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ExtTransactionAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turtlebasket.learnstarport.learnstarport.Query/ExtTransactionAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ExtTransactionAll(ctx, req.(*QueryAllExtTransactionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "turtlebasket.learnstarport.learnstarport.Query",
 	HandlerType: (*QueryServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams:     []grpc.StreamDesc{},
-	Metadata:    "learnstarport/query.proto",
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ExtTransaction",
+			Handler:    _Query_ExtTransaction_Handler,
+		},
+		{
+			MethodName: "ExtTransactionAll",
+			Handler:    _Query_ExtTransactionAll_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "learnstarport/query.proto",
 }
+
+func (m *QueryGetExtTransactionRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetExtTransactionRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetExtTransactionRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Id != 0 {
+		i = encodeVarintQuery(dAtA, i, uint64(m.Id))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetExtTransactionResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetExtTransactionResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetExtTransactionResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.ExtTransaction != nil {
+		{
+			size, err := m.ExtTransaction.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllExtTransactionRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllExtTransactionRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllExtTransactionRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllExtTransactionResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllExtTransactionResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllExtTransactionResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.ExtTransaction) > 0 {
+		for iNdEx := len(m.ExtTransaction) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.ExtTransaction[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
+	offset -= sovQuery(v)
+	base := offset
+	for v >= 1<<7 {
+		dAtA[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	dAtA[offset] = uint8(v)
+	return base
+}
+func (m *QueryGetExtTransactionRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Id != 0 {
+		n += 1 + sovQuery(uint64(m.Id))
+	}
+	return n
+}
+
+func (m *QueryGetExtTransactionResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.ExtTransaction != nil {
+		l = m.ExtTransaction.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryAllExtTransactionRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryAllExtTransactionResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.ExtTransaction) > 0 {
+		for _, e := range m.ExtTransaction {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func sovQuery(x uint64) (n int) {
+	return (math_bits.Len64(x|1) + 6) / 7
+}
+func sozQuery(x uint64) (n int) {
+	return sovQuery(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (m *QueryGetExtTransactionRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetExtTransactionRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetExtTransactionRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			m.Id = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Id |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetExtTransactionResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetExtTransactionResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetExtTransactionResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ExtTransaction", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.ExtTransaction == nil {
+				m.ExtTransaction = &ExtTransaction{}
+			}
+			if err := m.ExtTransaction.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllExtTransactionRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllExtTransactionRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllExtTransactionRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageRequest{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllExtTransactionResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllExtTransactionResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllExtTransactionResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ExtTransaction", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ExtTransaction = append(m.ExtTransaction, &ExtTransaction{})
+			if err := m.ExtTransaction[len(m.ExtTransaction)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageResponse{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func skipQuery(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
+	iNdEx := 0
+	depth := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return 0, io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		wireType := int(wire & 0x7)
+		switch wireType {
+		case 0:
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				iNdEx++
+				if dAtA[iNdEx-1] < 0x80 {
+					break
+				}
+			}
+		case 1:
+			iNdEx += 8
+		case 2:
+			var length int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				length |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if length < 0 {
+				return 0, ErrInvalidLengthQuery
+			}
+			iNdEx += length
+		case 3:
+			depth++
+		case 4:
+			if depth == 0 {
+				return 0, ErrUnexpectedEndOfGroupQuery
+			}
+			depth--
+		case 5:
+			iNdEx += 4
+		default:
+			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
+		}
+		if iNdEx < 0 {
+			return 0, ErrInvalidLengthQuery
+		}
+		if depth == 0 {
+			return iNdEx, nil
+		}
+	}
+	return 0, io.ErrUnexpectedEOF
+}
+
+var (
+	ErrInvalidLengthQuery        = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowQuery          = fmt.Errorf("proto: integer overflow")
+	ErrUnexpectedEndOfGroupQuery = fmt.Errorf("proto: unexpected end of group")
+)

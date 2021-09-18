@@ -4,12 +4,40 @@ package turtlebasket.learnstarport.learnstarport;
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 // this line is used by starport scaffolding # 1
+import "learnstarport/ext_transaction.proto";
 
 option go_package = "github.com/turtlebasket/learn-starport/x/learnstarport/types";
 
 // Query defines the gRPC querier service.
 service Query {
     // this line is used by starport scaffolding # 2
+
+	// Queries a extTransaction by id.
+	rpc ExtTransaction(QueryGetExtTransactionRequest) returns (QueryGetExtTransactionResponse) {
+		option (google.api.http).get = "/turtlebasket/learnstarport/learnstarport/extTransaction/{id}";
+	}
+
+	// Queries a list of extTransaction items.
+	rpc ExtTransactionAll(QueryAllExtTransactionRequest) returns (QueryAllExtTransactionResponse) {
+		option (google.api.http).get = "/turtlebasket/learnstarport/learnstarport/extTransaction";
+	}
+
 }
 
 // this line is used by starport scaffolding # 3
+message QueryGetExtTransactionRequest {
+	uint64 id = 1;
+}
+
+message QueryGetExtTransactionResponse {
+	ExtTransaction ExtTransaction = 1;
+}
+
+message QueryAllExtTransactionRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllExtTransactionResponse {
+	repeated ExtTransaction ExtTransaction = 1;
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
