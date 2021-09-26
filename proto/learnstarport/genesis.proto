@@ -2,11 +2,26 @@ syntax = "proto3";
 package turtlebasket.learnstarport.learnstarport;
 
 // this line is used by starport scaffolding # genesis/proto/import
+import "learnstarport/bch_tx.proto";
+import "learnstarport/xmr_tx.proto";
+import "learnstarport/doge_tx.proto";
+import "learnstarport/eth_tx.proto";
+import "learnstarport/btc_tx.proto";
 
 option go_package = "github.com/turtlebasket/learn-starport/x/learnstarport/types";
 
 // GenesisState defines the learnstarport module's genesis state.
 message GenesisState {
     // this line is used by starport scaffolding # genesis/proto/state
+		repeated BchTx bchTxList = 9; // this line is used by starport scaffolding # genesis/proto/stateField
+		uint64 bchTxCount = 10; // this line is used by starport scaffolding # genesis/proto/stateField
+		repeated XmrTx xmrTxList = 7; // this line is used by starport scaffolding # genesis/proto/stateField
+		uint64 xmrTxCount = 8; // this line is used by starport scaffolding # genesis/proto/stateField
+		repeated DogeTx dogeTxList = 5; // this line is used by starport scaffolding # genesis/proto/stateField
+		uint64 dogeTxCount = 6; // this line is used by starport scaffolding # genesis/proto/stateField
+		repeated EthTx ethTxList = 3; // this line is used by starport scaffolding # genesis/proto/stateField
+		uint64 ethTxCount = 4; // this line is used by starport scaffolding # genesis/proto/stateField
+		repeated BtcTx btcTxList = 1; // this line is used by starport scaffolding # genesis/proto/stateField
+		uint64 btcTxCount = 2; // this line is used by starport scaffolding # genesis/proto/stateField
     // this line is used by starport scaffolding # ibc/genesis/proto
 }

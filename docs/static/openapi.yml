@@ -19102,6 +19102,876 @@ paths:
           format: uint64
       tags:
         - Query
+  /turtlebasket/learnstarport/learnstarport/bchTx:
+    get:
+      summary: Queries a list of bchTx items.
+      operationId: TurtlebasketLearnstarportLearnstarportBchTxAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              BchTx:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    id:
+                      type: string
+                      format: uint64
+                    txid:
+                      type: string
+                    to:
+                      type: string
+                    from:
+                      type: string
+                    amount:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  nextKey:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.countTotal
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/turtlebasket/learnstarport/learnstarport/bchTx/{id}':
+    get:
+      summary: Queries a bchTx by id.
+      operationId: TurtlebasketLearnstarportLearnstarportBchTx
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              BchTx:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  id:
+                    type: string
+                    format: uint64
+                  txid:
+                    type: string
+                  to:
+                    type: string
+                  from:
+                    type: string
+                  amount:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: uint64
+      tags:
+        - Query
+  /turtlebasket/learnstarport/learnstarport/btcTx:
+    get:
+      summary: Queries a list of btcTx items.
+      operationId: TurtlebasketLearnstarportLearnstarportBtcTxAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              BtcTx:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    id:
+                      type: string
+                      format: uint64
+                    txid:
+                      type: string
+                    to:
+                      type: string
+                    from:
+                      type: string
+                    amount:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  nextKey:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.countTotal
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/turtlebasket/learnstarport/learnstarport/btcTx/{id}':
+    get:
+      summary: Queries a btcTx by id.
+      operationId: TurtlebasketLearnstarportLearnstarportBtcTx
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              BtcTx:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  id:
+                    type: string
+                    format: uint64
+                  txid:
+                    type: string
+                  to:
+                    type: string
+                  from:
+                    type: string
+                  amount:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: uint64
+      tags:
+        - Query
+  /turtlebasket/learnstarport/learnstarport/dogeTx:
+    get:
+      summary: Queries a list of dogeTx items.
+      operationId: TurtlebasketLearnstarportLearnstarportDogeTxAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              DogeTx:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    id:
+                      type: string
+                      format: uint64
+                    txid:
+                      type: string
+                    to:
+                      type: string
+                    from:
+                      type: string
+                    amount:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  nextKey:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.countTotal
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/turtlebasket/learnstarport/learnstarport/dogeTx/{id}':
+    get:
+      summary: Queries a dogeTx by id.
+      operationId: TurtlebasketLearnstarportLearnstarportDogeTx
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              DogeTx:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  id:
+                    type: string
+                    format: uint64
+                  txid:
+                    type: string
+                  to:
+                    type: string
+                  from:
+                    type: string
+                  amount:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: uint64
+      tags:
+        - Query
+  /turtlebasket/learnstarport/learnstarport/ethTx:
+    get:
+      summary: Queries a list of ethTx items.
+      operationId: TurtlebasketLearnstarportLearnstarportEthTxAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              EthTx:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    id:
+                      type: string
+                      format: uint64
+                    txid:
+                      type: string
+                    to:
+                      type: string
+                    from:
+                      type: string
+                    amount:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  nextKey:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.countTotal
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/turtlebasket/learnstarport/learnstarport/ethTx/{id}':
+    get:
+      summary: Queries a ethTx by id.
+      operationId: TurtlebasketLearnstarportLearnstarportEthTx
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              EthTx:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  id:
+                    type: string
+                    format: uint64
+                  txid:
+                    type: string
+                  to:
+                    type: string
+                  from:
+                    type: string
+                  amount:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: uint64
+      tags:
+        - Query
+  /turtlebasket/learnstarport/learnstarport/xmrTx:
+    get:
+      summary: Queries a list of xmrTx items.
+      operationId: TurtlebasketLearnstarportLearnstarportXmrTxAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              XmrTx:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    id:
+                      type: string
+                      format: uint64
+                    txid:
+                      type: string
+                    to:
+                      type: string
+                    from:
+                      type: string
+                    amount:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  nextKey:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.countTotal
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/turtlebasket/learnstarport/learnstarport/xmrTx/{id}':
+    get:
+      summary: Queries a xmrTx by id.
+      operationId: TurtlebasketLearnstarportLearnstarportXmrTx
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              XmrTx:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  id:
+                    type: string
+                    format: uint64
+                  txid:
+                    type: string
+                  to:
+                    type: string
+                  from:
+                    type: string
+                  amount:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: uint64
+      tags:
+        - Query
 definitions:
   cosmos.bank.v1beta1.DenomUnit:
     type: object
@@ -29268,3 +30138,458 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
+  turtlebasket.learnstarport.learnstarport.BchTx:
+    type: object
+    properties:
+      creator:
+        type: string
+      id:
+        type: string
+        format: uint64
+      txid:
+        type: string
+      to:
+        type: string
+      from:
+        type: string
+      amount:
+        type: string
+  turtlebasket.learnstarport.learnstarport.BtcTx:
+    type: object
+    properties:
+      creator:
+        type: string
+      id:
+        type: string
+        format: uint64
+      txid:
+        type: string
+      to:
+        type: string
+      from:
+        type: string
+      amount:
+        type: string
+  turtlebasket.learnstarport.learnstarport.DogeTx:
+    type: object
+    properties:
+      creator:
+        type: string
+      id:
+        type: string
+        format: uint64
+      txid:
+        type: string
+      to:
+        type: string
+      from:
+        type: string
+      amount:
+        type: string
+  turtlebasket.learnstarport.learnstarport.EthTx:
+    type: object
+    properties:
+      creator:
+        type: string
+      id:
+        type: string
+        format: uint64
+      txid:
+        type: string
+      to:
+        type: string
+      from:
+        type: string
+      amount:
+        type: string
+  turtlebasket.learnstarport.learnstarport.MsgCreateBchTxResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uint64
+  turtlebasket.learnstarport.learnstarport.MsgCreateBtcTxResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uint64
+  turtlebasket.learnstarport.learnstarport.MsgCreateDogeTxResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uint64
+  turtlebasket.learnstarport.learnstarport.MsgCreateEthTxResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uint64
+  turtlebasket.learnstarport.learnstarport.MsgCreateXmrTxResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uint64
+  turtlebasket.learnstarport.learnstarport.MsgDeleteBchTxResponse:
+    type: object
+  turtlebasket.learnstarport.learnstarport.MsgDeleteBtcTxResponse:
+    type: object
+  turtlebasket.learnstarport.learnstarport.MsgDeleteDogeTxResponse:
+    type: object
+  turtlebasket.learnstarport.learnstarport.MsgDeleteEthTxResponse:
+    type: object
+  turtlebasket.learnstarport.learnstarport.MsgDeleteXmrTxResponse:
+    type: object
+  turtlebasket.learnstarport.learnstarport.MsgUpdateBchTxResponse:
+    type: object
+  turtlebasket.learnstarport.learnstarport.MsgUpdateBtcTxResponse:
+    type: object
+  turtlebasket.learnstarport.learnstarport.MsgUpdateDogeTxResponse:
+    type: object
+  turtlebasket.learnstarport.learnstarport.MsgUpdateEthTxResponse:
+    type: object
+  turtlebasket.learnstarport.learnstarport.MsgUpdateXmrTxResponse:
+    type: object
+  turtlebasket.learnstarport.learnstarport.QueryAllBchTxResponse:
+    type: object
+    properties:
+      BchTx:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            id:
+              type: string
+              format: uint64
+            txid:
+              type: string
+            to:
+              type: string
+            from:
+              type: string
+            amount:
+              type: string
+      pagination:
+        type: object
+        properties:
+          nextKey:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  turtlebasket.learnstarport.learnstarport.QueryAllBtcTxResponse:
+    type: object
+    properties:
+      BtcTx:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            id:
+              type: string
+              format: uint64
+            txid:
+              type: string
+            to:
+              type: string
+            from:
+              type: string
+            amount:
+              type: string
+      pagination:
+        type: object
+        properties:
+          nextKey:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  turtlebasket.learnstarport.learnstarport.QueryAllDogeTxResponse:
+    type: object
+    properties:
+      DogeTx:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            id:
+              type: string
+              format: uint64
+            txid:
+              type: string
+            to:
+              type: string
+            from:
+              type: string
+            amount:
+              type: string
+      pagination:
+        type: object
+        properties:
+          nextKey:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  turtlebasket.learnstarport.learnstarport.QueryAllEthTxResponse:
+    type: object
+    properties:
+      EthTx:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            id:
+              type: string
+              format: uint64
+            txid:
+              type: string
+            to:
+              type: string
+            from:
+              type: string
+            amount:
+              type: string
+      pagination:
+        type: object
+        properties:
+          nextKey:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  turtlebasket.learnstarport.learnstarport.QueryAllXmrTxResponse:
+    type: object
+    properties:
+      XmrTx:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            id:
+              type: string
+              format: uint64
+            txid:
+              type: string
+            to:
+              type: string
+            from:
+              type: string
+            amount:
+              type: string
+      pagination:
+        type: object
+        properties:
+          nextKey:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  turtlebasket.learnstarport.learnstarport.QueryGetBchTxResponse:
+    type: object
+    properties:
+      BchTx:
+        type: object
+        properties:
+          creator:
+            type: string
+          id:
+            type: string
+            format: uint64
+          txid:
+            type: string
+          to:
+            type: string
+          from:
+            type: string
+          amount:
+            type: string
+  turtlebasket.learnstarport.learnstarport.QueryGetBtcTxResponse:
+    type: object
+    properties:
+      BtcTx:
+        type: object
+        properties:
+          creator:
+            type: string
+          id:
+            type: string
+            format: uint64
+          txid:
+            type: string
+          to:
+            type: string
+          from:
+            type: string
+          amount:
+            type: string
+  turtlebasket.learnstarport.learnstarport.QueryGetDogeTxResponse:
+    type: object
+    properties:
+      DogeTx:
+        type: object
+        properties:
+          creator:
+            type: string
+          id:
+            type: string
+            format: uint64
+          txid:
+            type: string
+          to:
+            type: string
+          from:
+            type: string
+          amount:
+            type: string
+  turtlebasket.learnstarport.learnstarport.QueryGetEthTxResponse:
+    type: object
+    properties:
+      EthTx:
+        type: object
+        properties:
+          creator:
+            type: string
+          id:
+            type: string
+            format: uint64
+          txid:
+            type: string
+          to:
+            type: string
+          from:
+            type: string
+          amount:
+            type: string
+  turtlebasket.learnstarport.learnstarport.QueryGetXmrTxResponse:
+    type: object
+    properties:
+      XmrTx:
+        type: object
+        properties:
+          creator:
+            type: string
+          id:
+            type: string
+            format: uint64
+          txid:
+            type: string
+          to:
+            type: string
+          from:
+            type: string
+          amount:
+            type: string
+  turtlebasket.learnstarport.learnstarport.XmrTx:
+    type: object
+    properties:
+      creator:
+        type: string
+      id:
+        type: string
+        format: uint64
+      txid:
+        type: string
+      to:
+        type: string
+      from:
+        type: string
+      amount:
+        type: string

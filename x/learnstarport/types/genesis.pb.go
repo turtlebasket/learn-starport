@@ -24,6 +24,17 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // GenesisState defines the learnstarport module's genesis state.
 type GenesisState struct {
+	// this line is used by starport scaffolding # genesis/proto/state
+	BchTxList   []*BchTx  `protobuf:"bytes,9,rep,name=bchTxList,proto3" json:"bchTxList,omitempty"`
+	BchTxCount  uint64    `protobuf:"varint,10,opt,name=bchTxCount,proto3" json:"bchTxCount,omitempty"`
+	XmrTxList   []*XmrTx  `protobuf:"bytes,7,rep,name=xmrTxList,proto3" json:"xmrTxList,omitempty"`
+	XmrTxCount  uint64    `protobuf:"varint,8,opt,name=xmrTxCount,proto3" json:"xmrTxCount,omitempty"`
+	DogeTxList  []*DogeTx `protobuf:"bytes,5,rep,name=dogeTxList,proto3" json:"dogeTxList,omitempty"`
+	DogeTxCount uint64    `protobuf:"varint,6,opt,name=dogeTxCount,proto3" json:"dogeTxCount,omitempty"`
+	EthTxList   []*EthTx  `protobuf:"bytes,3,rep,name=ethTxList,proto3" json:"ethTxList,omitempty"`
+	EthTxCount  uint64    `protobuf:"varint,4,opt,name=ethTxCount,proto3" json:"ethTxCount,omitempty"`
+	BtcTxList   []*BtcTx  `protobuf:"bytes,1,rep,name=btcTxList,proto3" json:"btcTxList,omitempty"`
+	BtcTxCount  uint64    `protobuf:"varint,2,opt,name=btcTxCount,proto3" json:"btcTxCount,omitempty"`
 }
 
 func (m *GenesisState) Reset()         { *m = GenesisState{} }
@@ -59,6 +70,76 @@ func (m *GenesisState) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_GenesisState proto.InternalMessageInfo
 
+func (m *GenesisState) GetBchTxList() []*BchTx {
+	if m != nil {
+		return m.BchTxList
+	}
+	return nil
+}
+
+func (m *GenesisState) GetBchTxCount() uint64 {
+	if m != nil {
+		return m.BchTxCount
+	}
+	return 0
+}
+
+func (m *GenesisState) GetXmrTxList() []*XmrTx {
+	if m != nil {
+		return m.XmrTxList
+	}
+	return nil
+}
+
+func (m *GenesisState) GetXmrTxCount() uint64 {
+	if m != nil {
+		return m.XmrTxCount
+	}
+	return 0
+}
+
+func (m *GenesisState) GetDogeTxList() []*DogeTx {
+	if m != nil {
+		return m.DogeTxList
+	}
+	return nil
+}
+
+func (m *GenesisState) GetDogeTxCount() uint64 {
+	if m != nil {
+		return m.DogeTxCount
+	}
+	return 0
+}
+
+func (m *GenesisState) GetEthTxList() []*EthTx {
+	if m != nil {
+		return m.EthTxList
+	}
+	return nil
+}
+
+func (m *GenesisState) GetEthTxCount() uint64 {
+	if m != nil {
+		return m.EthTxCount
+	}
+	return 0
+}
+
+func (m *GenesisState) GetBtcTxList() []*BtcTx {
+	if m != nil {
+		return m.BtcTxList
+	}
+	return nil
+}
+
+func (m *GenesisState) GetBtcTxCount() uint64 {
+	if m != nil {
+		return m.BtcTxCount
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*GenesisState)(nil), "turtlebasket.learnstarport.learnstarport.GenesisState")
 }
@@ -66,17 +147,29 @@ func init() {
 func init() { proto.RegisterFile("learnstarport/genesis.proto", fileDescriptor_91ce9897b6bd2f8a) }
 
 var fileDescriptor_91ce9897b6bd2f8a = []byte{
-	// 148 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0xce, 0x49, 0x4d, 0x2c,
-	0xca, 0x2b, 0x2e, 0x49, 0x2c, 0x2a, 0xc8, 0x2f, 0x2a, 0xd1, 0x4f, 0x4f, 0xcd, 0x4b, 0x2d, 0xce,
-	0x2c, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xd2, 0x28, 0x29, 0x2d, 0x2a, 0xc9, 0x49, 0x4d,
-	0x4a, 0x2c, 0xce, 0x4e, 0x2d, 0xd1, 0x43, 0x51, 0x89, 0xca, 0x53, 0xe2, 0xe3, 0xe2, 0x71, 0x87,
-	0x68, 0x0d, 0x2e, 0x49, 0x2c, 0x49, 0x75, 0x0a, 0x3b, 0xf1, 0x48, 0x8e, 0xf1, 0xc2, 0x23, 0x39,
-	0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x27, 0x3c, 0x96, 0x63, 0xb8, 0xf0, 0x58, 0x8e, 0xe1, 0xc6, 0x63,
-	0x39, 0x86, 0x28, 0x9b, 0xf4, 0xcc, 0x92, 0x8c, 0xd2, 0x24, 0xbd, 0xe4, 0xfc, 0x5c, 0x7d, 0x64,
-	0xe3, 0xf5, 0xc1, 0x06, 0xea, 0xc2, 0x5d, 0x52, 0xa1, 0x8f, 0xea, 0xb2, 0x92, 0xca, 0x82, 0xd4,
-	0xe2, 0x24, 0x36, 0xb0, 0xc3, 0x8c, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x7b, 0x5f, 0x97, 0x6d,
-	0xb7, 0x00, 0x00, 0x00,
+	// 348 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x92, 0xc1, 0x4a, 0xfb, 0x40,
+	0x10, 0xc6, 0x9b, 0x7f, 0xfb, 0xaf, 0x76, 0xeb, 0x29, 0xa7, 0x52, 0x61, 0x29, 0x9e, 0x7a, 0x31,
+	0x11, 0xbd, 0x7a, 0xaa, 0x8a, 0x17, 0x05, 0x89, 0x22, 0xe2, 0x45, 0xb2, 0x71, 0x69, 0x82, 0x4d,
+	0x36, 0xec, 0x4e, 0x20, 0xbe, 0x85, 0x4f, 0xe4, 0xd9, 0x63, 0x8f, 0x1e, 0x25, 0x79, 0x11, 0xd9,
+	0xdd, 0x98, 0x4d, 0x0a, 0x85, 0xe6, 0xf8, 0xcd, 0xee, 0x7c, 0x3f, 0xbe, 0x99, 0x41, 0x87, 0x2b,
+	0xea, 0xf3, 0x44, 0x80, 0xcf, 0x53, 0xc6, 0xc1, 0x5d, 0xd2, 0x84, 0x8a, 0x48, 0x38, 0x29, 0x67,
+	0xc0, 0xec, 0x39, 0x64, 0x1c, 0x56, 0x94, 0xf8, 0xe2, 0x8d, 0x82, 0xd3, 0xfa, 0xd9, 0x56, 0xd3,
+	0x69, 0xdb, 0x86, 0x04, 0xe1, 0x0b, 0xe4, 0xda, 0x65, 0xf3, 0x2d, 0x8f, 0xb9, 0x79, 0xdb, 0xc0,
+	0xbf, 0xb2, 0x25, 0xdd, 0xda, 0x48, 0x61, 0xbb, 0x29, 0x81, 0xa0, 0x7e, 0x3b, 0xfa, 0x1c, 0xa0,
+	0x83, 0x6b, 0x1d, 0xe4, 0x1e, 0x7c, 0xa0, 0xf6, 0x2d, 0x1a, 0x91, 0x20, 0x7c, 0xc8, 0x6f, 0x22,
+	0x01, 0x93, 0xd1, 0xac, 0x3f, 0x1f, 0x9f, 0xba, 0xce, 0xae, 0xd9, 0x9c, 0x85, 0x6c, 0xf5, 0x8c,
+	0x83, 0x8d, 0x11, 0x52, 0xe2, 0x82, 0x65, 0x09, 0x4c, 0xd0, 0xcc, 0x9a, 0x0f, 0xbc, 0x46, 0x45,
+	0xe2, 0xf2, 0x98, 0x57, 0xb8, 0xbd, 0xae, 0xb8, 0x27, 0xd9, 0xea, 0x19, 0x07, 0x89, 0x53, 0x42,
+	0xe3, 0xf6, 0x35, 0xce, 0x54, 0xec, 0x3b, 0x84, 0xe4, 0xdc, 0x2a, 0xde, 0x7f, 0xc5, 0x3b, 0xd9,
+	0x9d, 0x77, 0xa9, 0x7a, 0xbd, 0x86, 0x87, 0x3d, 0x43, 0x63, 0xad, 0x34, 0x72, 0xa8, 0x90, 0xcd,
+	0x92, 0x8c, 0x48, 0xe1, 0x6f, 0xa2, 0xfd, 0xae, 0x11, 0xaf, 0x40, 0x4d, 0xb4, 0x76, 0x90, 0x11,
+	0x95, 0xd0, 0xbc, 0x81, 0x8e, 0x68, 0x2a, 0x6a, 0x81, 0x10, 0x54, 0x38, 0xab, 0xf3, 0x02, 0x65,
+	0xab, 0x67, 0x1c, 0xd4, 0x02, 0xa5, 0xd0, 0xb8, 0x7f, 0xd5, 0x02, 0xeb, 0xca, 0xe2, 0xf1, 0xab,
+	0xc0, 0xd6, 0xba, 0xc0, 0xd6, 0x4f, 0x81, 0xad, 0x8f, 0x12, 0xf7, 0xd6, 0x25, 0xee, 0x7d, 0x97,
+	0xb8, 0xf7, 0x7c, 0xbe, 0x8c, 0x20, 0xcc, 0x88, 0x13, 0xb0, 0xd8, 0x6d, 0xf2, 0x5d, 0x45, 0x3c,
+	0x36, 0x47, 0xee, 0xb6, 0xef, 0x13, 0xde, 0x53, 0x2a, 0xc8, 0x50, 0xdd, 0xe7, 0xd9, 0x6f, 0x00,
+	0x00, 0x00, 0xff, 0xff, 0xce, 0x93, 0x33, 0xf3, 0x75, 0x03, 0x00, 0x00,
 }
 
 func (m *GenesisState) Marshal() (dAtA []byte, err error) {
@@ -99,6 +192,101 @@ func (m *GenesisState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.BchTxCount != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.BchTxCount))
+		i--
+		dAtA[i] = 0x50
+	}
+	if len(m.BchTxList) > 0 {
+		for iNdEx := len(m.BchTxList) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.BchTxList[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGenesis(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x4a
+		}
+	}
+	if m.XmrTxCount != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.XmrTxCount))
+		i--
+		dAtA[i] = 0x40
+	}
+	if len(m.XmrTxList) > 0 {
+		for iNdEx := len(m.XmrTxList) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.XmrTxList[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGenesis(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x3a
+		}
+	}
+	if m.DogeTxCount != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.DogeTxCount))
+		i--
+		dAtA[i] = 0x30
+	}
+	if len(m.DogeTxList) > 0 {
+		for iNdEx := len(m.DogeTxList) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.DogeTxList[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGenesis(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if m.EthTxCount != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.EthTxCount))
+		i--
+		dAtA[i] = 0x20
+	}
+	if len(m.EthTxList) > 0 {
+		for iNdEx := len(m.EthTxList) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.EthTxList[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGenesis(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if m.BtcTxCount != 0 {
+		i = encodeVarintGenesis(dAtA, i, uint64(m.BtcTxCount))
+		i--
+		dAtA[i] = 0x10
+	}
+	if len(m.BtcTxList) > 0 {
+		for iNdEx := len(m.BtcTxList) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.BtcTxList[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGenesis(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
 	return len(dAtA) - i, nil
 }
 
@@ -119,6 +307,51 @@ func (m *GenesisState) Size() (n int) {
 	}
 	var l int
 	_ = l
+	if len(m.BtcTxList) > 0 {
+		for _, e := range m.BtcTxList {
+			l = e.Size()
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if m.BtcTxCount != 0 {
+		n += 1 + sovGenesis(uint64(m.BtcTxCount))
+	}
+	if len(m.EthTxList) > 0 {
+		for _, e := range m.EthTxList {
+			l = e.Size()
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if m.EthTxCount != 0 {
+		n += 1 + sovGenesis(uint64(m.EthTxCount))
+	}
+	if len(m.DogeTxList) > 0 {
+		for _, e := range m.DogeTxList {
+			l = e.Size()
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if m.DogeTxCount != 0 {
+		n += 1 + sovGenesis(uint64(m.DogeTxCount))
+	}
+	if len(m.XmrTxList) > 0 {
+		for _, e := range m.XmrTxList {
+			l = e.Size()
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if m.XmrTxCount != 0 {
+		n += 1 + sovGenesis(uint64(m.XmrTxCount))
+	}
+	if len(m.BchTxList) > 0 {
+		for _, e := range m.BchTxList {
+			l = e.Size()
+			n += 1 + l + sovGenesis(uint64(l))
+		}
+	}
+	if m.BchTxCount != 0 {
+		n += 1 + sovGenesis(uint64(m.BchTxCount))
+	}
 	return n
 }
 
@@ -157,6 +390,271 @@ func (m *GenesisState) Unmarshal(dAtA []byte) error {
 			return fmt.Errorf("proto: GenesisState: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BtcTxList", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.BtcTxList = append(m.BtcTxList, &BtcTx{})
+			if err := m.BtcTxList[len(m.BtcTxList)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BtcTxCount", wireType)
+			}
+			m.BtcTxCount = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.BtcTxCount |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EthTxList", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.EthTxList = append(m.EthTxList, &EthTx{})
+			if err := m.EthTxList[len(m.EthTxList)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EthTxCount", wireType)
+			}
+			m.EthTxCount = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.EthTxCount |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DogeTxList", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DogeTxList = append(m.DogeTxList, &DogeTx{})
+			if err := m.DogeTxList[len(m.DogeTxList)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DogeTxCount", wireType)
+			}
+			m.DogeTxCount = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.DogeTxCount |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field XmrTxList", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XmrTxList = append(m.XmrTxList, &XmrTx{})
+			if err := m.XmrTxList[len(m.XmrTxList)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field XmrTxCount", wireType)
+			}
+			m.XmrTxCount = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.XmrTxCount |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 9:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BchTxList", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGenesis
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.BchTxList = append(m.BchTxList, &BchTx{})
+			if err := m.BchTxList[len(m.BchTxList)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 10:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BchTxCount", wireType)
+			}
+			m.BchTxCount = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGenesis
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.BchTxCount |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipGenesis(dAtA[iNdEx:])

@@ -2,12 +2,181 @@ syntax = "proto3";
 package turtlebasket.learnstarport.learnstarport;
 
 // this line is used by starport scaffolding # proto/tx/import
+import "learnstarport/bch_tx.proto";
+import "learnstarport/xmr_tx.proto";
+import "learnstarport/doge_tx.proto";
+import "learnstarport/eth_tx.proto";
+import "learnstarport/btc_tx.proto";
 
 option go_package = "github.com/turtlebasket/learn-starport/x/learnstarport/types";
 
 // Msg defines the Msg service.
 service Msg {
     // this line is used by starport scaffolding # proto/tx/rpc
+  rpc CreateBchTx(MsgCreateBchTx) returns (MsgCreateBchTxResponse);
+  rpc UpdateBchTx(MsgUpdateBchTx) returns (MsgUpdateBchTxResponse);
+  rpc DeleteBchTx(MsgDeleteBchTx) returns (MsgDeleteBchTxResponse);
+  rpc CreateXmrTx(MsgCreateXmrTx) returns (MsgCreateXmrTxResponse);
+  rpc UpdateXmrTx(MsgUpdateXmrTx) returns (MsgUpdateXmrTxResponse);
+  rpc DeleteXmrTx(MsgDeleteXmrTx) returns (MsgDeleteXmrTxResponse);
+  rpc CreateDogeTx(MsgCreateDogeTx) returns (MsgCreateDogeTxResponse);
+  rpc UpdateDogeTx(MsgUpdateDogeTx) returns (MsgUpdateDogeTxResponse);
+  rpc DeleteDogeTx(MsgDeleteDogeTx) returns (MsgDeleteDogeTxResponse);
+  rpc CreateEthTx(MsgCreateEthTx) returns (MsgCreateEthTxResponse);
+  rpc UpdateEthTx(MsgUpdateEthTx) returns (MsgUpdateEthTxResponse);
+  rpc DeleteEthTx(MsgDeleteEthTx) returns (MsgDeleteEthTxResponse);
+  rpc CreateBtcTx(MsgCreateBtcTx) returns (MsgCreateBtcTxResponse);
+  rpc UpdateBtcTx(MsgUpdateBtcTx) returns (MsgUpdateBtcTxResponse);
+  rpc DeleteBtcTx(MsgDeleteBtcTx) returns (MsgDeleteBtcTxResponse);
 }
 
 // this line is used by starport scaffolding # proto/tx/message
+message MsgCreateBchTx {
+  string creator = 1;
+  string txid = 2;
+  string to = 3;
+  string from = 4;
+  string amount = 5;
+}
+
+message MsgCreateBchTxResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateBchTx {
+  string creator = 1;
+  uint64 id = 2;
+  string txid = 3;
+  string to = 4;
+  string from = 5;
+  string amount = 6;
+}
+
+message MsgUpdateBchTxResponse { }
+
+message MsgDeleteBchTx {
+  string creator = 1;
+  uint64 id = 2;
+}
+
+message MsgDeleteBchTxResponse { }
+
+message MsgCreateXmrTx {
+  string creator = 1;
+  string txid = 2;
+  string to = 3;
+  string from = 4;
+  string amount = 5;
+}
+
+message MsgCreateXmrTxResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateXmrTx {
+  string creator = 1;
+  uint64 id = 2;
+  string txid = 3;
+  string to = 4;
+  string from = 5;
+  string amount = 6;
+}
+
+message MsgUpdateXmrTxResponse { }
+
+message MsgDeleteXmrTx {
+  string creator = 1;
+  uint64 id = 2;
+}
+
+message MsgDeleteXmrTxResponse { }
+
+message MsgCreateDogeTx {
+  string creator = 1;
+  string txid = 2;
+  string to = 3;
+  string from = 4;
+  string amount = 5;
+}
+
+message MsgCreateDogeTxResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateDogeTx {
+  string creator = 1;
+  uint64 id = 2;
+  string txid = 3;
+  string to = 4;
+  string from = 5;
+  string amount = 6;
+}
+
+message MsgUpdateDogeTxResponse { }
+
+message MsgDeleteDogeTx {
+  string creator = 1;
+  uint64 id = 2;
+}
+
+message MsgDeleteDogeTxResponse { }
+
+message MsgCreateEthTx {
+  string creator = 1;
+  string txid = 2;
+  string to = 3;
+  string from = 4;
+  string amount = 5;
+}
+
+message MsgCreateEthTxResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateEthTx {
+  string creator = 1;
+  uint64 id = 2;
+  string txid = 3;
+  string to = 4;
+  string from = 5;
+  string amount = 6;
+}
+
+message MsgUpdateEthTxResponse { }
+
+message MsgDeleteEthTx {
+  string creator = 1;
+  uint64 id = 2;
+}
+
+message MsgDeleteEthTxResponse { }
+
+message MsgCreateBtcTx {
+  string creator = 1;
+  string txid = 2;
+  string to = 3;
+  string from = 4;
+  string amount = 5;
+}
+
+message MsgCreateBtcTxResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateBtcTx {
+  string creator = 1;
+  uint64 id = 2;
+  string txid = 3;
+  string to = 4;
+  string from = 5;
+  string amount = 6;
+}
+
+message MsgUpdateBtcTxResponse { }
+
+message MsgDeleteBtcTx {
+  string creator = 1;
+  uint64 id = 2;
+}
+
+message MsgDeleteBtcTxResponse { }

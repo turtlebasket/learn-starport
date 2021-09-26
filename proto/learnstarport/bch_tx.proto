@@ -1,0 +1,15 @@
+syntax = "proto3";
+package turtlebasket.learnstarport.learnstarport;
+
+option go_package = "github.com/turtlebasket/learn-starport/x/learnstarport/types";
+
+import "gogoproto/gogo.proto";
+
+message BchTx {
+  string creator = 1;
+  uint64 id = 2;
+  string txid = 3; 
+  string to = 4; 
+  string from = 5; 
+  string amount = 6; 
+}

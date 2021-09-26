@@ -24,3 +24,28 @@ const (
 func KeyPrefix(p string) []byte {
 	return []byte(p)
 }
+
+const (
+	BtcTxKey      = "BtcTx-value-"
+	BtcTxCountKey = "BtcTx-count-"
+)
+
+const (
+	EthTxKey      = "EthTx-value-"
+	EthTxCountKey = "EthTx-count-"
+)
+
+const (
+	DogeTxKey      = "DogeTx-value-"
+	DogeTxCountKey = "DogeTx-count-"
+)
+
+const (
+	XmrTxKey      = "XmrTx-value-"
+	XmrTxCountKey = "XmrTx-count-"
+)
+
+const (
+	BchTxKey      = "BchTx-value-"
+	BchTxCountKey = "BchTx-count-"
+)

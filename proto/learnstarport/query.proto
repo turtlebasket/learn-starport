@@ -4,12 +4,152 @@ package turtlebasket.learnstarport.learnstarport;
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 // this line is used by starport scaffolding # 1
+import "learnstarport/bch_tx.proto";
+import "learnstarport/xmr_tx.proto";
+import "learnstarport/doge_tx.proto";
+import "learnstarport/eth_tx.proto";
+import "learnstarport/btc_tx.proto";
 
 option go_package = "github.com/turtlebasket/learn-starport/x/learnstarport/types";
 
 // Query defines the gRPC querier service.
 service Query {
     // this line is used by starport scaffolding # 2
+
+	// Queries a bchTx by id.
+	rpc BchTx(QueryGetBchTxRequest) returns (QueryGetBchTxResponse) {
+		option (google.api.http).get = "/turtlebasket/learnstarport/learnstarport/bchTx/{id}";
+	}
+
+	// Queries a list of bchTx items.
+	rpc BchTxAll(QueryAllBchTxRequest) returns (QueryAllBchTxResponse) {
+		option (google.api.http).get = "/turtlebasket/learnstarport/learnstarport/bchTx";
+	}
+
+
+	// Queries a xmrTx by id.
+	rpc XmrTx(QueryGetXmrTxRequest) returns (QueryGetXmrTxResponse) {
+		option (google.api.http).get = "/turtlebasket/learnstarport/learnstarport/xmrTx/{id}";
+	}
+
+	// Queries a list of xmrTx items.
+	rpc XmrTxAll(QueryAllXmrTxRequest) returns (QueryAllXmrTxResponse) {
+		option (google.api.http).get = "/turtlebasket/learnstarport/learnstarport/xmrTx";
+	}
+
+
+	// Queries a dogeTx by id.
+	rpc DogeTx(QueryGetDogeTxRequest) returns (QueryGetDogeTxResponse) {
+		option (google.api.http).get = "/turtlebasket/learnstarport/learnstarport/dogeTx/{id}";
+	}
+
+	// Queries a list of dogeTx items.
+	rpc DogeTxAll(QueryAllDogeTxRequest) returns (QueryAllDogeTxResponse) {
+		option (google.api.http).get = "/turtlebasket/learnstarport/learnstarport/dogeTx";
+	}
+
+
+	// Queries a ethTx by id.
+	rpc EthTx(QueryGetEthTxRequest) returns (QueryGetEthTxResponse) {
+		option (google.api.http).get = "/turtlebasket/learnstarport/learnstarport/ethTx/{id}";
+	}
+
+	// Queries a list of ethTx items.
+	rpc EthTxAll(QueryAllEthTxRequest) returns (QueryAllEthTxResponse) {
+		option (google.api.http).get = "/turtlebasket/learnstarport/learnstarport/ethTx";
+	}
+
+
+	// Queries a btcTx by id.
+	rpc BtcTx(QueryGetBtcTxRequest) returns (QueryGetBtcTxResponse) {
+		option (google.api.http).get = "/turtlebasket/learnstarport/learnstarport/btcTx/{id}";
+	}
+
+	// Queries a list of btcTx items.
+	rpc BtcTxAll(QueryAllBtcTxRequest) returns (QueryAllBtcTxResponse) {
+		option (google.api.http).get = "/turtlebasket/learnstarport/learnstarport/btcTx";
+	}
+
 }
 
 // this line is used by starport scaffolding # 3
+message QueryGetBchTxRequest {
+	uint64 id = 1;
+}
+
+message QueryGetBchTxResponse {
+	BchTx BchTx = 1;
+}
+
+message QueryAllBchTxRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllBchTxResponse {
+	repeated BchTx BchTx = 1;
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+message QueryGetXmrTxRequest {
+	uint64 id = 1;
+}
+
+message QueryGetXmrTxResponse {
+	XmrTx XmrTx = 1;
+}
+
+message QueryAllXmrTxRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllXmrTxResponse {
+	repeated XmrTx XmrTx = 1;
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+message QueryGetDogeTxRequest {
+	uint64 id = 1;
+}
+
+message QueryGetDogeTxResponse {
+	DogeTx DogeTx = 1;
+}
+
+message QueryAllDogeTxRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllDogeTxResponse {
+	repeated DogeTx DogeTx = 1;
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+message QueryGetEthTxRequest {
+	uint64 id = 1;
+}
+
+message QueryGetEthTxResponse {
+	EthTx EthTx = 1;
+}
+
+message QueryAllEthTxRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllEthTxResponse {
+	repeated EthTx EthTx = 1;
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+message QueryGetBtcTxRequest {
+	uint64 id = 1;
+}
+
+message QueryGetBtcTxResponse {
+	BtcTx BtcTx = 1;
+}
+
+message QueryAllBtcTxRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllBtcTxResponse {
+	repeated BtcTx BtcTx = 1;
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
